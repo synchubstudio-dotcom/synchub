@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: 'Noorliza';
+  src: url('/fonts/noorliza.regular.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-noorliza: 'Noorliza', sans-serif;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  overscroll-behavior: none; /* Prevents overscroll / bounce gestures */
+  touch-action: none; /* Prevents touch dragging/bouncing on mobile/trackpads */
+  user-select: none; /* Prevents text selection dragging */
+  -webkit-user-drag: none; /* Prevents element dragging */
+  background: #050505;
+  color: white;
+  font-family: var(--font-noorliza);
+}
+
+canvas {
+  display: block;
+}
