@@ -20,12 +20,13 @@ export default function Scene() {
        <CameraController />
      
       <SceneEnvironment />
+      <Lights />
      
       <FloatingDust />
       <SyncHubLogo />
    
        {/* <PlaneCracks /> */}
-       <GlassFragments />
+       {/* <GlassFragments /> */}
       <Effects />
     
 

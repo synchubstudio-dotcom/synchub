@@ -7,15 +7,9 @@ export default function Experience() {
   const scrollProgress = useExperienceStore((state) => state.scrollProgress);
 
   let opacity = 1.0;
-  if (scrollProgress < 1.0) {
-    opacity = 0.0;
-  } else if (scrollProgress >= 1.0 && scrollProgress < 2.0) {
-    opacity = scrollProgress - 1.0;
-  } else if (scrollProgress >= 2.0 && scrollProgress < 3.0) {
-    opacity = 1.0;
-  } else if (scrollProgress >= 3.0 && scrollProgress < 4.0) {
+  if (scrollProgress >= 3.0 && scrollProgress < 4.0) {
     opacity = Math.max(0.0, 1.0 - (scrollProgress - 3.0));
-  } else {
+  } else if (scrollProgress >= 4.0) {
     opacity = 0.0;
   }
 

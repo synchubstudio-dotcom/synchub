@@ -10,11 +10,13 @@ interface ExperienceStore {
   isAnimating: boolean;
   scrollProgress: number;
   targetScrollProgress: number;
+  isIntroComplete: boolean;
 
   setPhase: (phase: ExperiencePhase) => void;
   setAnimating: (value: boolean) => void;
   setScrollProgress: (progress: number) => void;
   setTargetScrollProgress: (target: number) => void;
+  setIntroComplete: (val: boolean) => void;
 }
 
 export const useExperienceStore = create<ExperienceStore>((set) => ({
@@ -22,6 +24,7 @@ export const useExperienceStore = create<ExperienceStore>((set) => ({
   isAnimating: false,
   scrollProgress: 0,
   targetScrollProgress: 0,
+  isIntroComplete: false,
 
   setPhase: (phase) => {
     set({ phase });
@@ -42,5 +45,9 @@ export const useExperienceStore = create<ExperienceStore>((set) => ({
 
   setTargetScrollProgress: (targetScrollProgress) => {
     set({ targetScrollProgress });
+  },
+
+  setIntroComplete: (isIntroComplete) => {
+    set({ isIntroComplete });
   },
 }));

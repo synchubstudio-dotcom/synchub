@@ -182,10 +182,27 @@ export default function ShapeBlur({
         grad.addColorStop(1, "#121212");
         
         fillCtx.fillStyle = grad;
-        fillCtx.font = "bold 120px Noorliza, sans-serif";
-        fillCtx.textAlign = "center";
+        const bodyFont = typeof window !== "undefined" ? window.getComputedStyle(document.body).fontFamily : "'Space Grotesk', sans-serif";
         fillCtx.textBaseline = "middle";
-        fillCtx.fillText("SyncHub", 512, 128);
+        
+        // Measure text sizes to center the two-weight text
+        fillCtx.font = `100 150px ${bodyFont}`;
+        const wSync = fillCtx.measureText("Sync").width;
+        fillCtx.font = `800 150px ${bodyFont}`;
+        const wHub = fillCtx.measureText("HUB").width;
+        const totalW = wSync + wHub;
+        
+        const startX = 512 - totalW / 2;
+        
+        // Draw Sync
+        fillCtx.font = `100 150px ${bodyFont}`;
+        fillCtx.textAlign = "left";
+        fillCtx.fillText("Sync", startX, 128);
+        
+        // Draw HUB
+        fillCtx.font = `800 150px ${bodyFont}`;
+        fillCtx.textAlign = "left";
+        fillCtx.fillText("HUB", startX + wSync, 128);
       }
       const fillTexture = new THREE.CanvasTexture(fillCanvas);
       material.uniforms.u_text_texture.value = fillTexture;

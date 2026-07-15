@@ -48,12 +48,27 @@ export default function PixelatedText() {
 
       offscreenCtx.clearRect(0, 0, 1600, 500);
       
-      // Draw text on offscreen canvas
-      offscreenCtx.fillStyle = "white";
-      offscreenCtx.font = `bold ${baseFontSize}px Noorliza, sans-serif`;
-      offscreenCtx.textAlign = "center";
+      const bodyFont = typeof window !== "undefined" ? window.getComputedStyle(document.body).fontFamily : "'Space Grotesk', sans-serif";
       offscreenCtx.textBaseline = "middle";
-      offscreenCtx.fillText("SyncHub", 800, 250);
+      
+      // Measure text sizes to center the dual-weight text
+      offscreenCtx.font = `300 ${baseFontSize}px ${bodyFont}`;
+      const wSync = offscreenCtx.measureText("Sync").width;
+      offscreenCtx.font = `800 ${baseFontSize}px ${bodyFont}`;
+      const wHub = offscreenCtx.measureText("HUB").width;
+      const totalW = wSync + wHub;
+      
+      const startX = 800 - totalW / 2;
+      
+      // Draw Sync
+      offscreenCtx.font = `300 ${baseFontSize}px ${bodyFont}`;
+      offscreenCtx.textAlign = "left";
+      offscreenCtx.fillText("Sync", startX, 250);
+      
+      // Draw HUB
+      offscreenCtx.font = `800 ${baseFontSize}px ${bodyFont}`;
+      offscreenCtx.textAlign = "left";
+      offscreenCtx.fillText("HUB", startX + wSync, 250);
 
       const imgData = offscreenCtx.getImageData(0, 0, 1600, 500);
       const data = imgData.data;
@@ -165,11 +180,18 @@ export default function PixelatedText() {
         const sp = useExperienceStore.getState().scrollProgress;
 
         if (sp <= 2.0) {
-          // Phase 0, 1, 2: solid normal text matching the original size and style (no particles, no hover)
           const fitScale = Math.min(width / 1600, height / 500) * 0.95;
-          ctx.textAlign = "center";
+          const bodyFont = typeof window !== "undefined" ? window.getComputedStyle(document.body).fontFamily : "'Space Grotesk', sans-serif";
           ctx.textBaseline = "middle";
-          ctx.font = `bold ${baseFontSize * fitScale}px Noorliza, sans-serif`;
+          
+          const fontSize = baseFontSize * fitScale;
+          ctx.font = `300 ${fontSize}px ${bodyFont}`;
+          const wSync = ctx.measureText("Sync").width;
+          ctx.font = `800 ${fontSize}px ${bodyFont}`;
+          const wHub = ctx.measureText("HUB").width;
+          const totalW = wSync + wHub;
+          
+          const startX = width / 2 - totalW / 2;
           
           // Re-align particles for the next transition
           particlesRef.current.forEach((p) => {
@@ -184,7 +206,16 @@ export default function PixelatedText() {
           grad.addColorStop(1, "#a3a3a3");
           
           ctx.fillStyle = grad;
-          ctx.fillText("SyncHub", width / 2, height / 2);
+
+          // Draw Sync
+          ctx.font = `300 ${fontSize}px ${bodyFont}`;
+          ctx.textAlign = "left";
+          ctx.fillText("Sync", startX, height / 2);
+          
+          // Draw HUB
+          ctx.font = `800 ${fontSize}px ${bodyFont}`;
+          ctx.textAlign = "left";
+          ctx.fillText("HUB", startX + wSync, height / 2);
         } else {
           // Phase 3 (scrollProgress > 2.0): Zoom increases and text breaks into interactive sparkles!
           const mouse = mouseRef.current;
