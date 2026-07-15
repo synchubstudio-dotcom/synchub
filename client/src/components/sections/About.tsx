@@ -78,8 +78,8 @@ export default function About({ opacity, translateY, isActive }: AboutProps) {
             </span>
             <span className="h-px w-8 bg-neutral-700" />
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-200 to-neutral-500 tracking-tight">
-            SyncHub
+          <h2 className="text-4xl md:text-5xl bg-clip-text text-transparent bg-gradient-to-b from-white via-neutral-200 to-neutral-500 tracking-tight">
+            <span className="font-light">Sync</span><span className="font-extrabold">HUB</span>
           </h2>
           <p className="text-sm md:text-base text-neutral-400 leading-relaxed font-sans">
             We blend digital art, interactive 3D physics, and creative code to shape state-of-the-art web experiences that leave a lasting impression.

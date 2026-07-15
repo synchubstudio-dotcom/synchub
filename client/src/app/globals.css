@@ -10,6 +10,7 @@
 
 @theme {
   --font-noorliza: 'Noorliza', sans-serif;
+  --font-space-grotesk: var(--font-space-grotesk), sans-serif;
 }
 
 :root {
@@ -38,7 +39,7 @@ body {
   -webkit-user-drag: none; /* Prevents element dragging */
   background: #050505;
   color: white;
-  font-family: var(--font-noorliza);
+  font-family: var(--font-space-grotesk);
 }
 
 canvas {
